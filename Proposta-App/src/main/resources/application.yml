@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: Proposta-App
+  datasource:
+    jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: update
+      properties:
+        hibernate:
+          format_sql: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: ${RABBITMQ_DEFAULT_USER}
+    password: ${RABBITMQ_DEFAULT_PASSWORD}
+
+---
+
+#(perfil dev - H2)
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:h2:mem:proposta
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+---
+
+#(perfil prod - Postgres)
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:postgresql://postgres:5432/propostadb
+    driver-class-name:  org.postgresql.Driver
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
