@@ -12,8 +12,8 @@ spring:
   rabbitmq:
     host: localhost
     port: 5672
-    username: ${RABBITMQ_DEFAULT_USER}
-    password: ${RABBITMQ_DEFAULT_PASSWORD}
+    username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PASS}
 
 ---
 
@@ -47,8 +47,8 @@ spring:
   datasource:
     url: jdbc:postgresql://postgres:5432/propostadb
     driver-class-name:  org.postgresql.Driver
-    username: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
+    username: ${PROPOSTA_DATASOURCE_USERNAME}
+    password: ${PROPOSTA_DATASOURCE_PASSWORD}
   jpa:
     properties:
       hibernate:
