@@ -20,7 +20,7 @@ public interface PropostaMapper {
     @Mapping(target = "usuario.renda", source = "renda")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "aprovada", ignore = true)
-    @Mapping(target = "integrada", ignore = true)
+    @Mapping(target = "integrada", constant = "true") // por padrão true
     @Mapping(target = "observacao", ignore = true)
     Proposta toEntity(PropostaDto propostaDto);
 

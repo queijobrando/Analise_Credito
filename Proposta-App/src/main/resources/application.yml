@@ -14,7 +14,9 @@ spring:
     port: 5672
     username: ${RABBITMQ_USER}
     password: ${RABBITMQ_PASS}
-
+rabbitmq:
+  propostapendente:
+    exchange: proposta-pendente.ex
 ---
 
 #(perfil dev - H2)
