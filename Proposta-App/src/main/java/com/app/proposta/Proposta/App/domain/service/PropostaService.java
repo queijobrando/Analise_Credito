@@ -5,9 +5,7 @@ import com.app.proposta.Proposta.App.api.dto.PropostaRespostaDto;
 import com.app.proposta.Proposta.App.api.mapper.PropostaMapper;
 import com.app.proposta.Proposta.App.domain.model.Proposta;
 import com.app.proposta.Proposta.App.infra.repository.PropostaRepository;
-import com.app.proposta.Proposta.App.infra.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,7 +19,7 @@ public class PropostaService {
 
     private final PropostaRepository propostaRepository;
     private final PropostaMapper propostaMapper;
-    private final NotificacaoService notificacaoService;
+    private final NotificacaoRabbitService notificacaoRabbitService;
 
     @Value("${rabbitmq.propostapendente.exchange}")
     private String propostaExchange; // Exchange definida lá no application.yml
@@ -29,7 +27,7 @@ public class PropostaService {
     // Metodo para enviar a mensagem para a exchange
     public void notificar(Proposta proposta){
         try {
-            notificacaoService.notificar(proposta, propostaExchange);
+            notificacaoRabbitService.notificar(proposta, propostaExchange);
         } catch (RuntimeException e){
             proposta.setIntegrada(false);
             propostaRepository.save(proposta);

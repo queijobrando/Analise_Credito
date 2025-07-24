@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class NotificacaoService {
+public class NotificacaoRabbitService {
 
     private final RabbitTemplate rabbitTemplate;
 
